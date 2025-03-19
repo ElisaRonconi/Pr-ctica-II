@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego rápido</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+   
+    <script>
+            
+            function repetir1(){
+                let numeros=[]; 
+              for (let step = 0; step < 5; step++){  
+                var aleatorio = Math.floor(Math.random()*10);
+                console.log(aleatorio);
+                
+                
+                //document.write(aleatorio);
+                document.getElementById("mostrar")=aleatorio.value;
+               
+                numeros.push(aleatorio);
+            }  
+        
+            // setTimeout(repeat, 1000);
+             //jugador ingresar resultado
+             // comparar con resultado
+               // let resultado = resolver cuenta del array
+               // ganaste / perdiste
+             }
+
+
+           /* function repetir2(num) {
+  const characters = "+-";
+  const charactersLength = characters.length;
+  let result = "";
+    for (let i = 0; i < num; i++) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+
+  return result;
+}
+console.log(repetir2(1));*/
+
+    </script>
+    
+    <input type="button" onclick="repetir1()"  id="boton" value="INICIO">
+    <div id="mostrar"> </div>
+
+
+</body>
+
+<!--pagina boton inicio
+mostrar 9 numeros aleatorios, sumados o restados, mostrar con segundos de intervalo, cuando termina el ultimo, 
+muestra caja text numerico donde el usuario en determinados segundos 
+va a escribir el resultante de los numeros.
+si coincide gano, sino muestra resultado y game over.
+no puede dar 0, ni se pueden suma o restar numeros iguales seguidos-->
+
+</html>
+
+
+
+
