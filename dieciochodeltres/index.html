@@ -7,46 +7,49 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-   
-    <script>
-            
-            function repetir1(){
-                let numeros=[]; 
-              for (let step = 0; step < 5; step++){  
-                var aleatorio = Math.floor(Math.random()*10);
-                console.log(aleatorio);
+  
+  <button onclick="repetir1()" id="boton">INICIAR</button>
+  <div id="numeroDeMuestra"> </div>
+  <input type="number" id="respuesta" placeholder="Ingresa tu respuesta" >
+  <button onclick="verificar()" id="botonVerificar" >Verificar</button>
+
+  <script>
+    let numeros=[]; 
+    let ultimoNum=null;
+    function repetir1(){
+       
+      let numeroMostrar=document.getElementById("numeroDeMuestra");         
+              for (let i = 0; i < 10; i++){  
+                setTimeout(()=>{
+                  let numero=  Math.floor(Math.random()*(10 -(-10) +1)) + (-10);
+                  //if (numero!==noRepeat) break;   //si numero es distinto del anterior salir dle bucle
+                  ultimoNum= numero;
+                  numeros.push(numero);
+                  numeroMostrar.textContent=numero;
+                  console.log("Numero generado: ", numero);
+
+                if (i===9){
+                setTimeout(()=>{
+                  numeroMostrar.textContent="Fin!";
+                  console.log("Lista de numeros generados:", numeros);
+                }, 1000);
+                }
+                },i*1000);
+              }
+            }
                 
-                
-                //document.write(aleatorio);
-                document.getElementById("mostrar")=aleatorio.value;
-               
-                numeros.push(aleatorio);
-            }  
-        
-            // setTimeout(repeat, 1000);
-             //jugador ingresar resultado
-             // comparar con resultado
-               // let resultado = resolver cuenta del array
-               // ganaste / perdiste
-             }
+      function verificar(){
+        let respuestaJugador= parseInt(document.getElementById("respuesta").value);
+        let suma= numeros.reduce((acc,num)=> acc +num,0);
 
-
-           /* function repetir2(num) {
-  const characters = "+-";
-  const charactersLength = characters.length;
-  let result = "";
-    for (let i = 0; i < num; i++) {
-        result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-
-  return result;
-}
-console.log(repetir2(1));*/
-
+        if (respuestaJugador=== suma){
+          alert("¡Has ganado!");
+        } else {
+          alert ("Perdiste... la suma era"+suma);
+        }
+      }      
     </script>
     
-    <input type="button" onclick="repetir1()"  id="boton" value="INICIO">
-    <div id="mostrar"> </div>
 
 
 </body>
