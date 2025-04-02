@@ -1,7 +1,39 @@
+
+
+
 document.addEventListener("DOMContentLoaded", function() {
     console.log("Juego listo");
 });
 
+function Temporizador(id,inicio,final){
+    this.inicio=inicio;
+    this.id=id;
+    this.final=final;
+    this.contador=this.inicio;
+
+    this.conteoSegundos = function(){
+        if (this.contador == this.final){
+            this.conteoSegundos =null;
+            swal(
+                'Oops...',
+                'Se ha acabado el tiempo!',
+                'error'
+              )
+
+            // Cuando tiempo llegue a lo ultimo mostrar aleta: 
+            //return;
+        }
+            document.getElementById(this.id). innerHTML= this.contador --;
+            setTimeout(this.conteoSegundos.bind(this),1000);
+            
+        };
+
+    }
+   
+let temporizador= new Temporizador('temporizador',10,0)
+temporizador.conteoSegundos();
+
+ 
 function iniciar() {
     let filas = 10;
     let columnas = 10;
@@ -12,19 +44,16 @@ function iniciar() {
         for (let j = 0; j < columnas; j++) {
             let celda = document.createElement("td");
             celda.id = `celda-${i}-${j}`;
-            celda.style.width = "30px";
-            celda.style.height = "30px";
-            celda.style.border = "1px solid black";
-            celda.style.textAlign = "center";
+        
             celda.addEventListener("click", () => disparar(i, j)); // Detectar disparos
             fila.appendChild(celda);
         }
         tablero.appendChild(fila);
     }
 
-    let boardDiv = document.getElementById("tableroJuego");
-    boardDiv.innerHTML = "";
-    boardDiv.appendChild(tablero);
+    let contadorImpactos = document.getElementById("tableroJuego");
+    contadorImpactos.innerHTML = "";
+    contadorImpactos.appendChild(tablero);
 
     colocarBarcos();
 }
@@ -76,13 +105,27 @@ function puedeColocar(tablero, fila, columna, tamanio, direccion) {
     return true;
 }
 
+
+let contadorImpactos=0;
+let contadorHundidos=0;
+
 function disparar(fila, columna) {
     let celda = document.getElementById(`celda-${fila}-${columna}`);
     if (tableroBarcos[fila][columna] === 1) {
         celda.style.backgroundColor = "red";
-        celda.innerText = "💥";
+        swal("¡Buuum!", "Barco alcanzado"); 
+        contadorImpactos++; 
+        contadorHundidos++; 
+        console.log(contadorImpactos);
+        document.getElementById("contadorImpactos").innerHTML=contadorImpactos;
+        document.getElementById("contadorHundidos").innerHTML=contadorHundidos;
+        //celda.innerText = "💥";
     } else {
         celda.style.backgroundColor = "blue";
-        celda.innerText = "🌊";
+        //celda.innerText = "🌊";
     }
+}
+
+function tiempo(){
+   //(determianr el tiempo de juego)
 }
